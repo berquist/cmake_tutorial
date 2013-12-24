@@ -10,6 +10,12 @@ double mysqrt(double x)
     }
   
   double result;
+
+  // if we have both log and exp then use them
+# if defined(HAVE_LOG) && defined(HAVE_EXP)
+  result = exp(log(x)*0.5);
+  fprintf(stdout,"Computing sqrt of %g to be %g using log\n",x,result);
+#else
   double delta;  
   result = x;
 
